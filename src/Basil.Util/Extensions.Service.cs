@@ -54,7 +54,10 @@ namespace Basil.Util {
                         new Info { Title = entryAssemblyName, Version = configuration["Swagger:Version"] });
                     var basePath = PlatformServices.Default.Application.ApplicationBasePath;
                     var xmlPath = Path.Combine(basePath, entryAssemblyName + ".xml");
-                    c.IncludeXmlComments(xmlPath);
+                    //EF update database then entryName is "ef"
+                    if (File.Exists(xmlPath)) {
+                        c.IncludeXmlComments(xmlPath);
+                    }
                     c.OperationFilter<AddAuthHeaderParameter>();
                 });
             }
