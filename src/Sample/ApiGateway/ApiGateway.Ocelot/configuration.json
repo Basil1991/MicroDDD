@@ -1,0 +1,53 @@
+﻿{
+  "ReRoutes": [
+    {
+      "DownstreamPathTemplate": "/webapp/{controller}/{action}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/webapp/{controller}/{action}",
+      "UpstreamHttpMethod": [ "Get", "Put", "Delete", "Post" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5001
+        }
+      ],
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 3,
+        "DurationOfBreak": 10,
+        "TimeoutValue": 5000
+      },
+      "HttpHandlerOptions": {
+        "AllowAutoRedirect": true,
+        "UseCookieContainer": true,
+        "UseTracing": true
+      },
+      "AuthenticationOptions": {}
+    },
+    {
+      "DownstreamPathTemplate": "/webapp2/{controller}/{action}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/webapp2/{controller}/{action}",
+      "UpstreamHttpMethod": [ "Get", "Put", "Delete", "Post" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5003
+        }
+      ],
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 3,
+        "DurationOfBreak": 10,
+        "TimeoutValue": 5000
+      },
+      "HttpHandlerOptions": {
+        "AllowAutoRedirect": true,
+        "UseCookieContainer": true,
+        "UseTracing": true
+      },
+      "AuthenticationOptions": {}
+    }
+  ],
+  "GlobalConfiguration": {
+    "RequestIdKey": "ot-traceId"
+  }
+}
