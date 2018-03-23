@@ -10,7 +10,8 @@ namespace Basil.Domain.Repositories {
     //    Need ICacher conn
     public interface ICacherRepository<TEntity, TPrimaryKey> where TEntity : AggregateRoot<TPrimaryKey> {
         List<TEntity> GetAllFromCacheAside(string cacheKey = null);
-        List<TEntity> GetAllIncludingFromCacheAside(string cacheKey = null, params Expression<Func<TEntity, object>>[] propertySelectors);
+        List<TEntity> GetAllIncludingFromCacheAside(params Expression<Func<TEntity, object>>[] propertySelectors);
+        List<TEntity> GetAllIncludingFromCacheAside(string cacheKey, params Expression<Func<TEntity, object>>[] propertySelectors);
     }
 
     public interface ICacherRepository<TEntity> : ICacherRepository<TEntity, int> where TEntity : AggregateRoot {

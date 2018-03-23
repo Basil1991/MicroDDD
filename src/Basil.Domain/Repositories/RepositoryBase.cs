@@ -202,11 +202,11 @@ namespace Basil.Domain.Repositories {
             return Expression.Lambda<Func<TEntity, bool>>(lambdaBody, lambdaParam);
         }
 
-        public List<TEntity> GetAllFromCacheAside(string cacheKey = null) {
+        public List<TEntity> GetAllFromCacheAside(string cacheKey) {
             return GetAllIncludingFromCacheAside(cacheKey);
         }
 
-        public List<TEntity> GetAllIncludingFromCacheAside(string cacheKey = null, params Expression<Func<TEntity, object>>[] propertySelectors) {
+        public List<TEntity> GetAllIncludingFromCacheAside(string cacheKey, params Expression<Func<TEntity, object>>[] propertySelectors) {
             cacheKey = cacheKey == null ? typeof(TEntity).Name : cacheKey;
             var list = cacher.ReadEntities<TEntity>(cacheKey);
             if (list == null) {
@@ -215,6 +215,10 @@ namespace Basil.Domain.Repositories {
                 list = clientsFromRepo;
             }
             return list;
+        }
+
+        public List<TEntity> GetAllIncludingFromCacheAside(params Expression<Func<TEntity, object>>[] propertySelectors) {
+            return GetAllIncludingFromCacheAside(cacheKey: null);
         }
     }
 }
