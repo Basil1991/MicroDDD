@@ -202,12 +202,12 @@ namespace Basil.Domain.Repositories {
             return Expression.Lambda<Func<TEntity, bool>>(lambdaBody, lambdaParam);
         }
 
-        public List<TEntity> GetAllFromCacheAside() {
-            return GetAllIncludingFromCacheAside();
+        public List<TEntity> GetAllFromCacheAside(string cacheKey = null) {
+            return GetAllIncludingFromCacheAside(cacheKey);
         }
 
-        public List<TEntity> GetAllIncludingFromCacheAside(params Expression<Func<TEntity, object>>[] propertySelectors) {
-            string cacheKey = typeof(TEntity).Name;
+        public List<TEntity> GetAllIncludingFromCacheAside(string cacheKey = null, params Expression<Func<TEntity, object>>[] propertySelectors) {
+            cacheKey = cacheKey == null ? typeof(TEntity).Name : cacheKey;
             var list = cacher.ReadEntities<TEntity>(cacheKey);
             if (list == null) {
                 var clientsFromRepo = GetAllIncluding(propertySelectors).ToList();
