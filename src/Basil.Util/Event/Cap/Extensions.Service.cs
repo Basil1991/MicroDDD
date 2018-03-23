@@ -11,9 +11,9 @@ namespace Basil.Util.Event.Cap {
     public static class Extensions {
         public static void AddEventBus(this IServiceCollection services, Action<CapOptions> action) {
             services.AddCap(action);
-            services.AddSingleton<IMessageEventBus, MessageEventBus>();
             services.AddSingleton<IEventHandlerManager, EventHandlerManager>();
-            services.AddSingleton<IEventBus, EventBus>();
+            services.AddScoped<IMessageEventBus, MessageEventBus>();
+            services.AddScoped<IEventBus, EventBus>();
         }
     }
 }

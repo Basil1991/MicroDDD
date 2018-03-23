@@ -1,4 +1,7 @@
-﻿using Basil.Domain.BaseModel;
+﻿using AspectCore.Injector;
+using Basil.Domain.BaseModel;
+using Basil.Util.Cache;
+using Basil.Util.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +12,11 @@ using System.Threading.Tasks;
 namespace Basil.Domain.Repositories {
     public abstract class RepositoryBase<TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey>
         where TEntity : AggregateRoot<TPrimaryKey> {
+        [FromContainer]
+        public ICacher cacher { get; set; }
+
+        [FromContainer]
+        public IJsonConverter jsonConverter { get; set; }
 
         public abstract IQueryable<TEntity> GetAll();
 
@@ -192,6 +200,21 @@ namespace Basil.Domain.Repositories {
                 );
 
             return Expression.Lambda<Func<TEntity, bool>>(lambdaBody, lambdaParam);
+        }
+
+        public List<TEntity> GetAllFromCacheAside() {
+            return GetAllIncludingFromCacheAside();
+        }
+
+        public List<TEntity> GetAllIncludingFromCacheAside(params Expression<Func<TEntity, object>>[] propertySelectors) {
+            string cacheKey = typeof(TEntity).Name;
+            var list = cacher.ReadEntities<TEntity>(cacheKey);
+            if (list == null) {
+                var clientsFromRepo = GetAllIncluding(propertySelectors).ToList();
+                cacher.Save(cacheKey, jsonConverter.Serialize(clientsFromRepo));
+                list = clientsFromRepo;
+            }
+            return list;
         }
     }
 }

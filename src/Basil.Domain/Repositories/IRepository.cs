@@ -7,7 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Basil.Domain.Repositories {
-    public interface IRepository<TEntity, TPrimaryKey> where TEntity : AggregateRoot<TPrimaryKey> {
+    public interface IRepository<TEntity, TPrimaryKey> : ICacherRepository<TEntity, TPrimaryKey>
+        where TEntity : AggregateRoot<TPrimaryKey> {
         //
         // Summary:
         //     Gets count of all entities in this repository.

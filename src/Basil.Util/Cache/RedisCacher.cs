@@ -16,11 +16,9 @@ namespace Basil.Util.Cache {
             this.redis = ConnectionMultiplexer.Connect(conn);
             this.db = redis.GetDatabase();
         }
-
         public string Read(string name) {
             return this.db.StringGet(name).ToString();
         }
-        
         public List<TEntity> ReadEntities<TEntity>(string name) {
             return jsonConverter.DeserializeEntities<TEntity>(this.db.StringGet(name).ToString());
         }
