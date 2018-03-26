@@ -18,11 +18,11 @@ namespace Basil.Util.ApiWidgets {
             Message = message,
             Result = result
         };
-        public static IApiResult Errored(string message = null, int? statusCode = null) => new ApiResult {
+        public static IApiResult Errored(string message, int? statusCode = null) => new ApiResult {
             StatusCode = statusCode ?? 400,
             Message = message
         };
-        public static IApiResult<TResult> Errored<TResult>(TResult errorResult, string message = null, int? statusCode = null) => new ApiResult<TResult> {
+        public static IApiResult<TResult> Errored<TResult>(TResult errorResult, string message, int? statusCode = null) => new ApiResult<TResult> {
             StatusCode = statusCode ?? 400,
             Message = message,
             Result = errorResult

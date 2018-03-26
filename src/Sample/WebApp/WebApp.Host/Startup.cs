@@ -30,6 +30,7 @@ namespace WebApp.Host {
             //注册WebApp中的所有服务
             services.AddWebApp(Configuration);
             services.AddMvcCore()
+                .AddDataAnnotations()
                 .AddAuthorization()
                 .AddApiExplorer()
                 .AddJsonFormatters(option => {
