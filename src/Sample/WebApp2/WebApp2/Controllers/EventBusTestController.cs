@@ -56,5 +56,15 @@ namespace WebApp2.Controllers {
         public string RecMsg2(string p) {
             return p;
         }
+
+        /// <summary>
+        /// 测试网关需要
+        /// 随便弄个接口
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public string Test() {
+            return "OK";
+        }
     }
 }

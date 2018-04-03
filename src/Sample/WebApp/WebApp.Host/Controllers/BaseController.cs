@@ -13,7 +13,7 @@ namespace WebApp.Host.Controllers {
     /// 1.支持路由
     /// </summary>
     [Route("webapp/[controller]/[action]")]
-    //[Authorize]
+    [Authorize]
     public class BaseController : Controller {
         public override void OnActionExecuting(ActionExecutingContext context) {
             if (!ModelState.IsValid) {
