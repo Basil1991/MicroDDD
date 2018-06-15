@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
     <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
@@ -11,9 +11,9 @@
 
   <ItemGroup>
     <PackageReference Include="Butterfly.Client.AspNetCore" Version="0.0.8" />
-    <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="2.4.0" />
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.2" />
+    <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="2.6.0" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.0" />
   </ItemGroup>
 
   <ItemGroup>
