@@ -11,5 +11,6 @@ namespace WebApp.Core.IAppService {
         void Update(m_Article article);
         List<m_Article> GetAll();
         m_Article Get(int id);
+        m_Article HystrixGet(int id);
     }
 }

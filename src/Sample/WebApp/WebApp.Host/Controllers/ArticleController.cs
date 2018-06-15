@@ -9,13 +9,16 @@ using WebApp.Core.IAppService;
 using WebApp.Core.Model;
 using WebApp.Service.Dtos;
 
-namespace WebApp.Host.Controllers {
+namespace WebApp.Host.Controllers
+{
     /// <summary>
     ///  文章
     /// </summary>
-    public class ArticleController : BaseController {
+    public class ArticleController : BaseController
+    {
         private IArticleService articleService;
-        public ArticleController(IArticleService articleService) {
+        public ArticleController(IArticleService articleService)
+        {
             this.articleService = articleService;
         }
         /// <summary>
@@ -24,7 +27,8 @@ namespace WebApp.Host.Controllers {
         /// <param name="d_Article_Add">新建的文章模型</param>
         /// <returns></returns>
         [HttpPut]
-        public IApiResult Add([FromBody]d_Article_Add d_Article_Add) {
+        public IApiResult Add([FromBody]d_Article_Add d_Article_Add)
+        {
             //model对象不应该传递给客户端，无论对客户端的传递和接收一律只能通过dto对象
             var m_Article = d_Article_Add.MapTo<m_Article>();
             articleService.Add(m_Article);
@@ -38,17 +42,30 @@ namespace WebApp.Host.Controllers {
         /// <param name="d_ArticleComment_Add"></param>
         /// <returns></returns>
         [HttpPut("{articleId}")]
-        public IApiResult AddComment(int articleId, [FromBody] d_ArticleComment_Add d_ArticleComment_Add) {
+        public IApiResult AddComment(int articleId, [FromBody] d_ArticleComment_Add d_ArticleComment_Add)
+        {
             articleService.AddComment(articleId, d_ArticleComment_Add.MapTo<m_ArticleComment>());
             return ApiResult.Succeed();
         }
         [HttpGet]
-        public IApiResult<List<d_Article_Show>> GetAll() {
+        public IApiResult<List<d_Article_Show>> GetAll()
+        {
             return ApiResult.Succeed(articleService.GetAll().MapToList<d_Article_Show>());
         }
         [HttpGet("{Id}")]
-        public IApiResult<d_Article_Show> Get(int Id) {
+        public IApiResult<d_Article_Show> Get(int Id)
+        {
             return ApiResult.Succeed(articleService.Get(Id).MapTo<d_Article_Show>());
+        }
+        /// <summary>
+        /// Polly测试
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        [HttpGet("Hystrix")]
+        public IApiResult<d_Article_Show> Hystrix(int Id)
+        {
+            return ApiResult.Succeed(articleService.HystrixGet(Id).MapTo<d_Article_Show>());
         }
     }
 }
