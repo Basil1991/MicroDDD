@@ -6,9 +6,8 @@ using System.Collections.Generic;
 using System.Text;
 using WebApp.Core.IRepos;
 using WebApp.Repos.Repos;
-using WebApp.Repos.UoW;
 using Microsoft.Extensions.Configuration;
-
+using Basil.Domain.Repositories.EFCore;
 
 namespace WebApp.Repos {
     public static class Extentions {
@@ -17,10 +16,8 @@ namespace WebApp.Repos {
                 options.UseMySql(configuration.GetConnectionString("WebAppDb"));
             });
             services.AddScoped<DbContext, WikiDbContext>();
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-
+            services.AddScoped<IUnitOfWork, EfUnitOfWork>();
             services.AddScoped<IArticleRepo, ArticleRepo>();
-
             services.AddScoped<UnitOfWorkInterceptor>();
         }
     }

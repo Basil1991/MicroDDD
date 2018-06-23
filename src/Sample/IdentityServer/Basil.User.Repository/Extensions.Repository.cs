@@ -1,13 +1,10 @@
 ﻿using Basil.Domain.BaseModel;
+using Basil.Domain.Repositories.EFCore;
 using Basil.User.Core.IRepositories;
 using Basil.User.EntityFrameworkCore.Repositories;
-using Basil.User.Repository.UoW;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Basil.User.Repository {
     public static class Extensions {
@@ -16,7 +13,7 @@ namespace Basil.User.Repository {
                 options.UseMySql(configuration.GetConnectionString("UserDb"));
             });
             services.AddScoped<DbContext, UserDbContext>();
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUnitOfWork, EfUnitOfWork>();
 
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IClientRepository, ClientRepository>();

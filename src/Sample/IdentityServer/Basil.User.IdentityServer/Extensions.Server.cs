@@ -9,7 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Basil.User.Core.IService;
 using Basil.Domain.BaseModel;
-using Basil.User.Repository.UoW;
 using AspectCore.Injector;
 using AspectCore.Configuration;
 using Basil.Util.Event.Cap;

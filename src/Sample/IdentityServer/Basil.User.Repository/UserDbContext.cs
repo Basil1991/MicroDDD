@@ -9,9 +9,6 @@ namespace Basil.User.Repository {
     public class UserDbContext : DbContext {
         public UserDbContext(DbContextOptions options) :
             base(options) { }
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
-        //    optionsBuilder.UseMySql(AppSetting.DbConnection);
-        //}
         public DbSet<m_User> m_User { get; set; }
         public DbSet<m_Client> m_Client { get; set; }
         public DbSet<m_Role> m_Role { get; set; }
